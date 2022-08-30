@@ -33,11 +33,52 @@ The library can be imported in the usual ways::
     import arithmetical
     from arithmetical import *
 
+Examples
+^^^^^^^^
+
+.. |arithmetical| replace:: ``arithmetical``
+.. _arithmetical: https://arithmetical.readthedocs.io/en/0.1.0/_source/arithmetical.html#arithmetical.arithmetical.arithmetical
+
+.. |operator| replace:: ``operator``
+.. _operator: https://docs.python.org/3/library/operator.html#module-operator
+
+Each instance of the |arithmetical|_ class (derived from the type of the built-in functions found in the built-in :obj:`operator` library) represents a function that operates on on values of `numeric <https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex>`__ types and on objects that define the `special methods <https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types>`__ associated with these built-in operators.
+
+    >>> from arithmetical import arithmetical
+    >>> arithmetical.add_(1, 2)
+    3
+
+Methods for retrieving the name and arity of an |arithmetical|_ instance are provided.
+
+    >>> arithmetical.add_.name()
+    'add'
+    >>> arithmetical.add_.arity()
+    2
+
+Instances of |arithmetical|_ can be compared according to their precedence.
+
+    >>> arithmetical.pow_ > arithmetical.mul_
+    True
+    >>> arithmetical.pow_ <= arithmetical.add_
+    False
+    >>> sorted([pow_, mul_, add_] # From lowest to highest precedence.
+    [add_, mul_, pow_]
+
+Instances are also hashable and can be used as members of `sets <https://docs.python.org/3/tutorial/datastructures.html#sets>`__ and as keys within `dictionaries <https://docs.python.org/3/tutorial/datastructures.html#dictionaries>`__.
+
+    >>> from arithmetical import *
+    >>> {add_, mul_}
+    {mul_, add_}
+    >>> {add_: 0, mul_: 1}
+    {add_: 0, mul_: 1}
+
+This library is compatible with the `circuit <https://pypi.org/project/circuit>`__ library (and is intended to complement the `logical <https://pypi.org/project/logical>`__ library for logical operations).
+
 Development
 -----------
-All installation and development dependencies are fully specified in ``pyproject.toml``. The ``project.optional-dependencies`` object is used to `specify optional requirements <https://peps.python.org/pep-0621>`__ for various development tasks. This makes it possible to specify additional options (such as ``test``, ``lint``, and so on) when performing installation using `pip <https://pypi.org/project/pip>`__::
+All installation and development dependencies are fully specified in ``pyproject.toml``. The ``project.optional-dependencies`` object is used to `specify optional requirements <https://peps.python.org/pep-0621>`__ for various development tasks. This makes it possible to specify additional options (such as ``docs``, ``lint``, and so on) when performing installation using `pip <https://pypi.org/project/pip>`__::
 
-    python -m pip install .[test,lint]
+    python -m pip install .[docs,lint]
 
 Documentation
 ^^^^^^^^^^^^^

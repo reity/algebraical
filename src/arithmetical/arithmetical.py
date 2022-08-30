@@ -1,6 +1,12 @@
 """
 Class for representing arithmetic operators as callable, immutable, hashable,
 and sortable objects.
+
+Instances of the class exported by this library can be used as gate operations
+within circuits as they are implemented within the
+`circuit <https://pypi.org/project/circuit>`__ library. This library is intended
+to complement the `logical <https://pypi.org/project/logical>`__ library for
+logical operations.
 """
 from __future__ import annotations
 from typing import Any, Tuple
@@ -10,7 +16,7 @@ import operator
 class arithmetical(type(operator)):
     """
     Class for representing arithmetic operators. This class is derived from
-    the type of the operators found in the built-in :obj:`operator` library.
+    the type of the built-in functions found in the :obj:`operator` library.
     Thus, it is possible to invoke these operators on values of
     `numeric <https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex>`__
     types and on objects that define the special
@@ -33,6 +39,17 @@ class arithmetical(type(operator)):
     True
     >>> pow_ < add_
     False
+    >>> sorted([pow_, mul_, add_]) # From lowest to highest precedence.
+    [add_, mul_, pow_]
+
+    Instances are also hashable and can be used as members of :obj:`set`
+    instances and as keys within :obj:`dict` instances.
+
+    >>> from arithmetical import *
+    >>> {add_, add_, add_}
+    {add_}
+    >>> sorted({add_: 0, mul_: 1}.items())
+    [(add_, 0), (mul_, 1)]
     """
     names: dict = None
     """Typical concise names for arithmetic operators."""
@@ -68,7 +85,7 @@ class arithmetical(type(operator)):
 
     def name(self: arithmetical) -> str:
         """
-        Return the typical concise name for this operator.
+        Return the canonical concise name for this operator.
 
         >>> arithmetical.mul_.name()
         'mul'
@@ -134,14 +151,14 @@ class arithmetical(type(operator)):
         True
         >>> pow_ < mul_
         False
-        >>> abs_ < add_
+        >>> add_ > abs_
         False
 
         Operators that have the same precedence are not *less than* one another.
 
         >>> mul_ < mul_
         False
-        >>> add_ < sub_
+        >>> sub_ > add_
         False
         """
         return self._precedence() < other._precedence()
@@ -156,9 +173,9 @@ class arithmetical(type(operator)):
         True
         >>> add_ <= pow_
         True
-        >>> pow_ <= mul_
+        >>> mul_ >= pow_
         False
-        >>> mul_ <= mul_
+        >>> mul_ >= mul_
         True
         """
         return self._precedence() <= other._precedence()
@@ -166,51 +183,81 @@ class arithmetical(type(operator)):
     pos_: arithmetical = None
     """
     Identity operator.
+
+    >>> pos_(2)
+    2
     """
 
     neg_: arithmetical = None
     """
     Negation operator.
+
+    >>> neg_(2)
+    -2
     """
 
     abs_: arithmetical = None
     """
     Absolute value operator.
+
+    >>> abs(-2)
+    2
     """
 
     add_: arithmetical = None
     """
     Addition operator.
+
+    >>> add_(1, 2)
+    3
     """
 
     sub_: arithmetical = None
     """
     Subtraction operator.
+
+    >>> sub_(3, 2)
+    1
     """
 
     mul_: arithmetical = None
     """
     Multiplication operator.
+
+    >>> mul_(2, 3)
+    6
     """
 
     truediv_: arithmetical = None
     """
     Division operator.
+
+    >>> truediv_(4, 2)
+    2
     """
 
     floordiv_: arithmetical = None
     """
     Integer division operator.
+
+    >>> floordiv_(3, 2)
+    1
     """
 
     mod_: arithmetical = None
     """
     Modulus operator.
+
+    >>> mod_(7, 4)
+    3
     """
 
     pow_: arithmetical = None
     """
     Exponentiation operator.
+
+    >>> pow_(2, 3)
+    8
     """
 
 # All operators as named class constants.

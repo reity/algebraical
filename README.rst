@@ -4,7 +4,7 @@ arithmetical
 
 Class for representing arithmetic operators as callable, immutable, hashable, and sortable objects.
 
-|pypi| |readthedocs|
+|pypi| |readthedocs| |actions| |coveralls|
 
 .. |pypi| image:: https://badge.fury.io/py/arithmetical.svg
    :target: https://badge.fury.io/py/arithmetical
@@ -13,6 +13,14 @@ Class for representing arithmetic operators as callable, immutable, hashable, an
 .. |readthedocs| image:: https://readthedocs.org/projects/arithmetical/badge/?version=latest
    :target: https://arithmetical.readthedocs.io/en/latest/?badge=latest
    :alt: Read the Docs documentation status.
+
+.. |actions| image:: https://github.com/reity/arithmetical/workflows/lint-test-cover-docs/badge.svg
+   :target: https://github.com/reity/arithmetical/actions/workflows/lint-test-cover-docs.yml
+   :alt: GitHub Actions status.
+
+.. |coveralls| image:: https://coveralls.io/repos/github/reity/arithmetical/badge.svg?branch=main
+   :target: https://coveralls.io/github/reity/arithmetical?branch=main
+   :alt: Coveralls test coverage summary.
 
 Installation and Usage
 ----------------------

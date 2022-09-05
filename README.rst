@@ -39,23 +39,23 @@ Examples
 .. |arithmetical| replace:: ``arithmetical``
 .. _arithmetical: https://arithmetical.readthedocs.io/en/0.1.0/_source/arithmetical.html#arithmetical.arithmetical.arithmetical
 
-.. |operator| replace:: ``operator``
-.. _operator: https://docs.python.org/3/library/operator.html#module-operator
+.. |operator| replace:: operator
+.. _operator: https://docs.python.org/3/library/operator.html
 
-Each instance of the |arithmetical|_ class (derived from the type of the built-in functions found in the built-in :obj:`operator` library) represents a function that operates on on values of `numeric <https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex>`__ types and on objects that define the `special methods <https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types>`__ associated with these built-in operators.
+Each instance of the |arithmetical|_ class (derived from the type of the built-in functions found in the built-in |operator|_ library) represents a function that operates on on values of `numeric <https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex>`__ types and on objects that define the `special methods <https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types>`__ associated with these built-in operators::
 
     >>> from arithmetical import arithmetical
     >>> arithmetical.add_(1, 2)
     3
 
-Methods for retrieving the name and arity of an |arithmetical|_ instance are provided.
+Methods for retrieving the name and arity of an |arithmetical|_ instance are provided::
 
     >>> arithmetical.add_.name()
     'add'
     >>> arithmetical.add_.arity()
     2
 
-Instances of |arithmetical|_ can be compared according to their precedence.
+Instances of |arithmetical|_ can be compared according to their precedence::
 
     >>> arithmetical.pow_ > arithmetical.mul_
     True
@@ -64,7 +64,7 @@ Instances of |arithmetical|_ can be compared according to their precedence.
     >>> sorted([pow_, mul_, add_] # From lowest to highest precedence.
     [add_, mul_, pow_]
 
-Instances are also hashable and can be used as members of `sets <https://docs.python.org/3/tutorial/datastructures.html#sets>`__ and as keys within `dictionaries <https://docs.python.org/3/tutorial/datastructures.html#dictionaries>`__.
+Instances are also hashable and can be used as members of `sets <https://docs.python.org/3/tutorial/datastructures.html#sets>`__ and as keys within `dictionaries <https://docs.python.org/3/tutorial/datastructures.html#dictionaries>`__::
 
     >>> from arithmetical import *
     >>> {add_, mul_}

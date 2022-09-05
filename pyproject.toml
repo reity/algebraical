@@ -1,5 +1,5 @@
 [project]
-name = "arithmetical"
+name = "arithmetically"
 version = "0.1.0"
 description = """\
     Class for representing arithmetic operators as callable, \
@@ -14,8 +14,8 @@ readme = "README.rst"
 requires-python = ">=3.7"
 
 [project.urls]
-Repository = "https://github.com/reity/arithmetical"
-Documentation = "https://arithmetical.readthedocs.io"
+Repository = "https://github.com/reity/arithmetically"
+Documentation = "https://arithmetically.readthedocs.io"
 
 [project.optional-dependencies]
 docs = [
@@ -45,4 +45,4 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [tool.pytest.ini_options]
-addopts = "--doctest-modules --ignore=docs --cov=arithmetical --cov-report term-missing"
+addopts = "--doctest-modules --ignore=docs --cov=arithmetically --cov-report term-missing"

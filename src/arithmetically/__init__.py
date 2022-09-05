@@ -1,6 +1,6 @@
 """Gives users direct access to class and functions."""
-from arithmetical.arithmetical import \
-    arithmetical, \
+from arithmetically.arithmetically import \
+    arithmetically, \
     pos_, neg_, abs_, \
     add_, sub_, \
     mul_, truediv_, floordiv_, mod_, \

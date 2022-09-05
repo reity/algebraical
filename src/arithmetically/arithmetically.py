@@ -13,7 +13,7 @@ from typing import Any, Tuple
 import doctest
 import operator
 
-class arithmetical(type(operator)):
+class arithmetically(type(operator)):
     """
     Class for representing arithmetic operators. This class is derived from
     the type of the built-in functions found in the :obj:`operator` library.
@@ -23,14 +23,14 @@ class arithmetical(type(operator)):
     `methods <https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types>`__
     associated with these built-in operators.
 
-    >>> arithmetical.add_(1, 2)
+    >>> arithmetically.add_(1, 2)
     3
 
     The name and arity of an instance can be retrieved.
 
-    >>> arithmetical.mul_.name()
+    >>> arithmetically.mul_.name()
     'mul'
-    >>> arithmetical.mul_.arity()
+    >>> arithmetically.mul_.arity()
     2
 
     Instances can be compared according to their precedence.
@@ -45,7 +45,7 @@ class arithmetical(type(operator)):
     Instances are also hashable and can be used as members of :obj:`set`
     instances and as keys within :obj:`dict` instances.
 
-    >>> from arithmetical import *
+    >>> from arithmetically import *
     >>> {add_, add_, add_}
     {add_}
     >>> sorted({add_: 0, mul_: 1}.items())
@@ -58,7 +58,7 @@ class arithmetical(type(operator)):
     """Arities of arithmetic operators."""
 
     def __init__(
-            self: arithmetical,
+            self: arithmetically,
             function: operator, # pylint: disable=redefined-outer-name
             name: str
         ):
@@ -71,76 +71,76 @@ class arithmetical(type(operator)):
         self.function = function
 
     def __call__(
-            self: arithmetical,
+            self: arithmetically,
             *arguments: Tuple[Any, ...]
         ) -> Any:
         """
         Apply the function represented by this instance to zero or more
         arguments.
 
-        >>> arithmetical.add_(1, 2)
+        >>> arithmetically.add_(1, 2)
         3
         """
         return self.function(*arguments)
 
-    def name(self: arithmetical) -> str:
+    def name(self: arithmetically) -> str:
         """
         Return the canonical concise name for this operator.
 
-        >>> arithmetical.mul_.name()
+        >>> arithmetically.mul_.name()
         'mul'
         """
-        return arithmetical.names[self] # pylint: disable=unsubscriptable-object
+        return arithmetically.names[self] # pylint: disable=unsubscriptable-object
 
-    def arity(self: arithmetical) -> int:
+    def arity(self: arithmetically) -> int:
         """
         Return the arity of this operator.
 
-        >>> arithmetical.mul_.arity()
+        >>> arithmetically.mul_.arity()
         2
-        >>> arithmetical.neg_.arity()
+        >>> arithmetically.neg_.arity()
         1
         """
-        return arithmetical.arities[self] # pylint: disable=unsubscriptable-object
+        return arithmetically.arities[self] # pylint: disable=unsubscriptable-object
 
-    def __repr__(self: arithmetical) -> str:
+    def __repr__(self: arithmetically) -> str:
         """
         String representation of this instance.
 
-        >>> arithmetical.mul_
+        >>> arithmetically.mul_
         mul_
         """
-        return arithmetical.names[self] + '_' # pylint: disable=unsubscriptable-object
+        return arithmetically.names[self] + '_' # pylint: disable=unsubscriptable-object
 
-    def __str__(self: arithmetical) -> str:
+    def __str__(self: arithmetically) -> str:
         """
         String representation of this instance.
 
-        >>> str(arithmetical.mul_)
+        >>> str(arithmetically.mul_)
         'mul_'
         """
         return repr(self)
 
-    def _precedence(self: arithmetical):
+    def _precedence(self: arithmetically):
         """
         Return an integer that represents the precedence of an operator
         (with a higher integer representing a higher precedence).
         """
-        if self == arithmetical.abs_:
+        if self == arithmetically.abs_:
             return 3
-        if self == arithmetical.pow_:
+        if self == arithmetically.pow_:
             return 2
         if self in (
-            arithmetical.mul_,
-            arithmetical.truediv_,
-            arithmetical.floordiv_,
-            arithmetical.mod_
+            arithmetically.mul_,
+            arithmetically.truediv_,
+            arithmetically.floordiv_,
+            arithmetically.mod_
         ):
             return 1
 
         return 0
 
-    def __lt__(self: arithmetical, other: arithmetical) -> bool:
+    def __lt__(self: arithmetically, other: arithmetically) -> bool:
         """
         Compare two operators according to their precedence, where an operator
         with lower precedence is *less than* an operator with higher precedence.
@@ -163,7 +163,7 @@ class arithmetical(type(operator)):
         """
         return self._precedence() < other._precedence()
 
-    def __le__(self: arithmetical, other: arithmetical) -> bool:
+    def __le__(self: arithmetically, other: arithmetically) -> bool:
         """
         Compare two operators according to their precedence, where an operator
         with lower precedence is *less than or equal to* an operator with
@@ -180,7 +180,7 @@ class arithmetical(type(operator)):
         """
         return self._precedence() <= other._precedence()
 
-    pos_: arithmetical = None
+    pos_: arithmetically = None
     """
     Identity operator.
 
@@ -188,7 +188,7 @@ class arithmetical(type(operator)):
     2
     """
 
-    neg_: arithmetical = None
+    neg_: arithmetically = None
     """
     Negation operator.
 
@@ -196,7 +196,7 @@ class arithmetical(type(operator)):
     -2
     """
 
-    abs_: arithmetical = None
+    abs_: arithmetically = None
     """
     Absolute value operator.
 
@@ -204,7 +204,7 @@ class arithmetical(type(operator)):
     2
     """
 
-    add_: arithmetical = None
+    add_: arithmetically = None
     """
     Addition operator.
 
@@ -212,7 +212,7 @@ class arithmetical(type(operator)):
     3
     """
 
-    sub_: arithmetical = None
+    sub_: arithmetically = None
     """
     Subtraction operator.
 
@@ -220,7 +220,7 @@ class arithmetical(type(operator)):
     1
     """
 
-    mul_: arithmetical = None
+    mul_: arithmetically = None
     """
     Multiplication operator.
 
@@ -228,7 +228,7 @@ class arithmetical(type(operator)):
     6
     """
 
-    truediv_: arithmetical = None
+    truediv_: arithmetically = None
     """
     Division operator.
 
@@ -236,7 +236,7 @@ class arithmetical(type(operator)):
     2
     """
 
-    floordiv_: arithmetical = None
+    floordiv_: arithmetically = None
     """
     Integer division operator.
 
@@ -244,7 +244,7 @@ class arithmetical(type(operator)):
     1
     """
 
-    mod_: arithmetical = None
+    mod_: arithmetically = None
     """
     Modulus operator.
 
@@ -252,7 +252,7 @@ class arithmetical(type(operator)):
     3
     """
 
-    pow_: arithmetical = None
+    pow_: arithmetically = None
     """
     Exponentiation operator.
 
@@ -261,55 +261,55 @@ class arithmetical(type(operator)):
     """
 
 # All operators as named class constants.
-arithmetical.pos_ = arithmetical(operator.pos, 'pos')
-arithmetical.neg_ = arithmetical(operator.neg, 'neg')
-arithmetical.abs_ = arithmetical(operator.abs, 'abs')
-arithmetical.add_ = arithmetical(operator.add, 'add')
-arithmetical.sub_ = arithmetical(operator.add, 'sub')
-arithmetical.mul_ = arithmetical(operator.mul, 'mul')
-arithmetical.truediv_ = arithmetical(operator.truediv, 'truediv')
-arithmetical.floordiv_ = arithmetical(operator.floordiv, 'floordiv')
-arithmetical.mod_ = arithmetical(operator.mod, 'mod')
-arithmetical.pow_ = arithmetical(operator.pow, 'pow')
+arithmetically.pos_ = arithmetically(operator.pos, 'pos')
+arithmetically.neg_ = arithmetically(operator.neg, 'neg')
+arithmetically.abs_ = arithmetically(operator.abs, 'abs')
+arithmetically.add_ = arithmetically(operator.add, 'add')
+arithmetically.sub_ = arithmetically(operator.add, 'sub')
+arithmetically.mul_ = arithmetically(operator.mul, 'mul')
+arithmetically.truediv_ = arithmetically(operator.truediv, 'truediv')
+arithmetically.floordiv_ = arithmetically(operator.floordiv, 'floordiv')
+arithmetically.mod_ = arithmetically(operator.mod, 'mod')
+arithmetically.pow_ = arithmetically(operator.pow, 'pow')
 
 # All operators as top-level constants.
-pos_: arithmetical = arithmetical.pos_
-neg_: arithmetical = arithmetical.neg_
-abs_: arithmetical = arithmetical.abs_
-add_: arithmetical = arithmetical.add_
-sub_: arithmetical = arithmetical.sub_
-mul_: arithmetical = arithmetical.mul_
-truediv_: arithmetical = arithmetical.truediv_
-floordiv_: arithmetical = arithmetical.floordiv_
-mod_: arithmetical = arithmetical.mod_
-pow_: arithmetical = arithmetical.pow_
+pos_: arithmetically = arithmetically.pos_
+neg_: arithmetically = arithmetically.neg_
+abs_: arithmetically = arithmetically.abs_
+add_: arithmetically = arithmetically.add_
+sub_: arithmetically = arithmetically.sub_
+mul_: arithmetically = arithmetically.mul_
+truediv_: arithmetically = arithmetically.truediv_
+floordiv_: arithmetically = arithmetically.floordiv_
+mod_: arithmetically = arithmetically.mod_
+pow_: arithmetically = arithmetically.pow_
 
 # Operator names.
-arithmetical.names: dict = {
-    arithmetical.pos_: 'pos',
-    arithmetical.neg_: 'neg',
-    arithmetical.abs_: 'abs',
-    arithmetical.add_: 'add',
-    arithmetical.sub_: 'sub',
-    arithmetical.mul_: 'mul',
-    arithmetical.truediv_: 'truediv',
-    arithmetical.floordiv_: 'floordiv',
-    arithmetical.mod_: 'mod',
-    arithmetical.pow_: 'pow'
+arithmetically.names: dict = {
+    arithmetically.pos_: 'pos',
+    arithmetically.neg_: 'neg',
+    arithmetically.abs_: 'abs',
+    arithmetically.add_: 'add',
+    arithmetically.sub_: 'sub',
+    arithmetically.mul_: 'mul',
+    arithmetically.truediv_: 'truediv',
+    arithmetically.floordiv_: 'floordiv',
+    arithmetically.mod_: 'mod',
+    arithmetically.pow_: 'pow'
 }
 
 # Operator arities.
-arithmetical.arities: dict = {
-    arithmetical.pos_: 1,
-    arithmetical.neg_: 1,
-    arithmetical.abs_: 1,
-    arithmetical.add_: 2,
-    arithmetical.sub_: 2,
-    arithmetical.mul_: 2,
-    arithmetical.truediv_: 2,
-    arithmetical.floordiv_: 2,
-    arithmetical.mod_: 2,
-    arithmetical.pow_: 2
+arithmetically.arities: dict = {
+    arithmetically.pos_: 1,
+    arithmetically.neg_: 1,
+    arithmetically.abs_: 1,
+    arithmetically.add_: 2,
+    arithmetically.sub_: 2,
+    arithmetically.mul_: 2,
+    arithmetically.truediv_: 2,
+    arithmetically.floordiv_: 2,
+    arithmetically.mod_: 2,
+    arithmetically.pow_: 2
 }
 
 if __name__ == '__main__':

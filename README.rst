@@ -4,6 +4,8 @@ algebraical
 
 Subclass of the `built-in function type <https://docs.python.org/3/library/operator.html>`__ for representing algebraic operators (that are typically associated with algebraic structures and algebraic circuits) as immutable, hashable, sortable, and callable objects.
 
+This library is compatible with the `circuit <https://pypi.org/project/circuit>`__ library and is intended to complement the `logical <https://pypi.org/project/logical>`__ library for logical operations.
+
 |pypi| |readthedocs| |actions| |coveralls|
 
 .. |pypi| image:: https://badge.fury.io/py/algebraical.svg
@@ -37,7 +39,7 @@ Examples
 ^^^^^^^^
 
 .. |algebraical| replace:: ``algebraical``
-.. _algebraic: https://algebraical.readthedocs.io/en/0.1.0/_source/algebraical.html#algebraical.algebraical.algebraical
+.. _algebraical: https://algebraical.readthedocs.io/en/0.1.1/_source/algebraical.html#algebraical.algebraical.algebraical
 
 .. |operator| replace:: operator
 .. _operator: https://docs.python.org/3/library/operator.html
@@ -71,8 +73,6 @@ Instances are also hashable and can be used as members of `sets <https://docs.py
     {mul_, add_}
     >>> {add_: 0, mul_: 1}
     {add_: 0, mul_: 1}
-
-This library is compatible with the `circuit <https://pypi.org/project/circuit>`__ library (and is intended to complement the `logical <https://pypi.org/project/logical>`__ library for logical operations).
 
 Development
 -----------

@@ -1,6 +1,6 @@
 [project]
 name = "algebraical"
-version = "0.1.0"
+version = "0.1.1"
 description = """\
     Subclass of the built-in function type for representing algebraic \
     operators (that are typically associated with algebraic structures \

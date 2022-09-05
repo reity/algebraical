@@ -1,6 +1,9 @@
 """
-Class for representing arithmetic operators as callable, immutable, hashable,
-and sortable objects.
+Subclass of the
+`built-in function type <https://docs.python.org/3/library/operator.html>`__
+for representing algebraic operators (that are typically associated with
+algebraic structures and algebraic circuits) as immutable, hashable, sortable,
+and callable objects.
 
 Instances of the class exported by this library can be used as gate operations
 within circuits as they are implemented within the
@@ -13,9 +16,9 @@ from typing import Any, Tuple
 import doctest
 import operator
 
-class arithmetically(type(operator)):
+class algebraical(type(operator)):
     """
-    Class for representing arithmetic operators. This class is derived from
+    Class for representing algebraic operators. This class is derived from
     the type of the built-in functions found in the :obj:`operator` library.
     Thus, it is possible to invoke these operators on values of
     `numeric <https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex>`__
@@ -23,14 +26,14 @@ class arithmetically(type(operator)):
     `methods <https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types>`__
     associated with these built-in operators.
 
-    >>> arithmetically.add_(1, 2)
+    >>> algebraical.add_(1, 2)
     3
 
     The name and arity of an instance can be retrieved.
 
-    >>> arithmetically.mul_.name()
+    >>> algebraical.mul_.name()
     'mul'
-    >>> arithmetically.mul_.arity()
+    >>> algebraical.mul_.arity()
     2
 
     Instances can be compared according to their precedence.
@@ -45,20 +48,20 @@ class arithmetically(type(operator)):
     Instances are also hashable and can be used as members of :obj:`set`
     instances and as keys within :obj:`dict` instances.
 
-    >>> from arithmetically import *
+    >>> from algebraical import *
     >>> {add_, add_, add_}
     {add_}
     >>> sorted({add_: 0, mul_: 1}.items())
     [(add_, 0), (mul_, 1)]
     """
     names: dict = None
-    """Typical concise names for arithmetic operators."""
+    """Typical concise names for operators."""
 
     arities: dict = None
-    """Arities of arithmetic operators."""
+    """Arities of operators."""
 
     def __init__(
-            self: arithmetically,
+            self: algebraical,
             function: operator, # pylint: disable=redefined-outer-name
             name: str
         ):
@@ -71,76 +74,77 @@ class arithmetically(type(operator)):
         self.function = function
 
     def __call__(
-            self: arithmetically,
+            self: algebraical,
             *arguments: Tuple[Any, ...]
         ) -> Any:
         """
         Apply the function represented by this instance to zero or more
         arguments.
 
-        >>> arithmetically.add_(1, 2)
+        >>> algebraical.add_(1, 2)
         3
         """
         return self.function(*arguments)
 
-    def name(self: arithmetically) -> str:
+    def name(self: algebraical) -> str:
         """
         Return the canonical concise name for this operator.
 
-        >>> arithmetically.mul_.name()
+        >>> algebraical.mul_.name()
         'mul'
         """
-        return arithmetically.names[self] # pylint: disable=unsubscriptable-object
+        return algebraical.names[self] # pylint: disable=unsubscriptable-object
 
-    def arity(self: arithmetically) -> int:
+    def arity(self: algebraical) -> int:
         """
         Return the arity of this operator.
 
-        >>> arithmetically.mul_.arity()
+        >>> algebraical.mul_.arity()
         2
-        >>> arithmetically.neg_.arity()
+        >>> algebraical.neg_.arity()
         1
         """
-        return arithmetically.arities[self] # pylint: disable=unsubscriptable-object
+        return algebraical.arities[self] # pylint: disable=unsubscriptable-object
 
-    def __repr__(self: arithmetically) -> str:
+    def __repr__(self: algebraical) -> str:
         """
         String representation of this instance.
 
-        >>> arithmetically.mul_
+        >>> algebraical.mul_
         mul_
         """
-        return arithmetically.names[self] + '_' # pylint: disable=unsubscriptable-object
+        return algebraical.names[self] + '_' # pylint: disable=unsubscriptable-object
 
-    def __str__(self: arithmetically) -> str:
+    def __str__(self: algebraical) -> str:
         """
         String representation of this instance.
 
-        >>> str(arithmetically.mul_)
+        >>> str(algebraical.mul_)
         'mul_'
         """
         return repr(self)
 
-    def _precedence(self: arithmetically):
+    def _precedence(self: algebraical):
         """
         Return an integer that represents the precedence of an operator
         (with a higher integer representing a higher precedence).
         """
-        if self == arithmetically.abs_:
+        if self == algebraical.abs_:
             return 3
-        if self == arithmetically.pow_:
+        if self == algebraical.pow_:
             return 2
         if self in (
-            arithmetically.mul_,
-            arithmetically.truediv_,
-            arithmetically.floordiv_,
-            arithmetically.mod_
+            algebraical.mul_,
+            algebraical.matmul_,
+            algebraical.truediv_,
+            algebraical.floordiv_,
+            algebraical.mod_
         ):
             return 1
 
         return 0
 
-    def __lt__(self: arithmetically, other: arithmetically) -> bool:
+    def __lt__(self: algebraical, other: algebraical) -> bool:
         """
         Compare two operators according to their precedence, where an operator
         with lower precedence is *less than* an operator with higher precedence.
@@ -163,7 +167,7 @@ class arithmetically(type(operator)):
         """
         return self._precedence() < other._precedence()
 
-    def __le__(self: arithmetically, other: arithmetically) -> bool:
+    def __le__(self: algebraical, other: algebraical) -> bool:
         """
         Compare two operators according to their precedence, where an operator
         with lower precedence is *less than or equal to* an operator with
@@ -180,7 +184,7 @@ class arithmetically(type(operator)):
         """
         return self._precedence() <= other._precedence()
 
-    pos_: arithmetically = None
+    pos_: algebraical = None
     """
     Identity operator.
 
@@ -188,7 +192,7 @@ class arithmetically(type(operator)):
     2
     """
 
-    neg_: arithmetically = None
+    neg_: algebraical = None
     """
     Negation operator.
 
@@ -196,7 +200,7 @@ class arithmetically(type(operator)):
     -2
     """
 
-    abs_: arithmetically = None
+    abs_: algebraical = None
     """
     Absolute value operator.
 
@@ -204,7 +208,7 @@ class arithmetically(type(operator)):
     2
     """
 
-    add_: arithmetically = None
+    add_: algebraical = None
     """
     Addition operator.
 
@@ -212,7 +216,7 @@ class arithmetically(type(operator)):
     3
     """
 
-    sub_: arithmetically = None
+    sub_: algebraical = None
     """
     Subtraction operator.
 
@@ -220,7 +224,7 @@ class arithmetically(type(operator)):
     1
     """
 
-    mul_: arithmetically = None
+    mul_: algebraical = None
     """
     Multiplication operator.
 
@@ -228,7 +232,18 @@ class arithmetically(type(operator)):
     6
     """
 
-    truediv_: arithmetically = None
+    matmul_: algebraical = None
+    """
+    Alternative multiplication operator.
+
+    >>> class free(tuple):
+    ...     def __matmul(self, other):
+    ...         return free((self, other))
+    >>> isinstance(matmul_(free(), free()), free)
+    True
+    """
+
+    truediv_: algebraical = None
     """
     Division operator.
 
@@ -236,7 +251,7 @@ class arithmetically(type(operator)):
     2
     """
 
-    floordiv_: arithmetically = None
+    floordiv_: algebraical = None
     """
     Integer division operator.
 
@@ -244,7 +259,7 @@ class arithmetically(type(operator)):
     1
     """
 
-    mod_: arithmetically = None
+    mod_: algebraical = None
     """
     Modulus operator.
 
@@ -252,7 +267,7 @@ class arithmetically(type(operator)):
     3
     """
 
-    pow_: arithmetically = None
+    pow_: algebraical = None
     """
     Exponentiation operator.
 
@@ -261,55 +276,59 @@ class arithmetically(type(operator)):
     """
 
 # All operators as named class constants.
-arithmetically.pos_ = arithmetically(operator.pos, 'pos')
-arithmetically.neg_ = arithmetically(operator.neg, 'neg')
-arithmetically.abs_ = arithmetically(operator.abs, 'abs')
-arithmetically.add_ = arithmetically(operator.add, 'add')
-arithmetically.sub_ = arithmetically(operator.add, 'sub')
-arithmetically.mul_ = arithmetically(operator.mul, 'mul')
-arithmetically.truediv_ = arithmetically(operator.truediv, 'truediv')
-arithmetically.floordiv_ = arithmetically(operator.floordiv, 'floordiv')
-arithmetically.mod_ = arithmetically(operator.mod, 'mod')
-arithmetically.pow_ = arithmetically(operator.pow, 'pow')
+algebraical.pos_ = algebraical(operator.pos, 'pos')
+algebraical.neg_ = algebraical(operator.neg, 'neg')
+algebraical.abs_ = algebraical(operator.abs, 'abs')
+algebraical.add_ = algebraical(operator.add, 'add')
+algebraical.sub_ = algebraical(operator.add, 'sub')
+algebraical.mul_ = algebraical(operator.mul, 'mul')
+algebraical.matmul_ = algebraical(operator.matmul, 'matmul')
+algebraical.truediv_ = algebraical(operator.truediv, 'truediv')
+algebraical.floordiv_ = algebraical(operator.floordiv, 'floordiv')
+algebraical.mod_ = algebraical(operator.mod, 'mod')
+algebraical.pow_ = algebraical(operator.pow, 'pow')
 
 # All operators as top-level constants.
-pos_: arithmetically = arithmetically.pos_
-neg_: arithmetically = arithmetically.neg_
-abs_: arithmetically = arithmetically.abs_
-add_: arithmetically = arithmetically.add_
-sub_: arithmetically = arithmetically.sub_
-mul_: arithmetically = arithmetically.mul_
-truediv_: arithmetically = arithmetically.truediv_
-floordiv_: arithmetically = arithmetically.floordiv_
-mod_: arithmetically = arithmetically.mod_
-pow_: arithmetically = arithmetically.pow_
+pos_: algebraical = algebraical.pos_
+neg_: algebraical = algebraical.neg_
+abs_: algebraical = algebraical.abs_
+add_: algebraical = algebraical.add_
+sub_: algebraical = algebraical.sub_
+mul_: algebraical = algebraical.mul_
+matmul_: algebraical = algebraical.matmul_
+truediv_: algebraical = algebraical.truediv_
+floordiv_: algebraical = algebraical.floordiv_
+mod_: algebraical = algebraical.mod_
+pow_: algebraical = algebraical.pow_
 
 # Operator names.
-arithmetically.names: dict = {
-    arithmetically.pos_: 'pos',
-    arithmetically.neg_: 'neg',
-    arithmetically.abs_: 'abs',
-    arithmetically.add_: 'add',
-    arithmetically.sub_: 'sub',
-    arithmetically.mul_: 'mul',
-    arithmetically.truediv_: 'truediv',
-    arithmetically.floordiv_: 'floordiv',
-    arithmetically.mod_: 'mod',
-    arithmetically.pow_: 'pow'
+algebraical.names: dict = {
+    algebraical.pos_: 'pos',
+    algebraical.neg_: 'neg',
+    algebraical.abs_: 'abs',
+    algebraical.add_: 'add',
+    algebraical.sub_: 'sub',
+    algebraical.mul_: 'mul',
+    algebraical.matmul_: 'matmul',
+    algebraical.truediv_: 'truediv',
+    algebraical.floordiv_: 'floordiv',
+    algebraical.mod_: 'mod',
+    algebraical.pow_: 'pow'
 }
 
 # Operator arities.
-arithmetically.arities: dict = {
-    arithmetically.pos_: 1,
-    arithmetically.neg_: 1,
-    arithmetically.abs_: 1,
-    arithmetically.add_: 2,
-    arithmetically.sub_: 2,
-    arithmetically.mul_: 2,
-    arithmetically.truediv_: 2,
-    arithmetically.floordiv_: 2,
-    arithmetically.mod_: 2,
-    arithmetically.pow_: 2
+algebraical.arities: dict = {
+    algebraical.pos_: 1,
+    algebraical.neg_: 1,
+    algebraical.abs_: 1,
+    algebraical.add_: 2,
+    algebraical.sub_: 2,
+    algebraical.mul_: 2,
+    algebraical.matmul_: 2,
+    algebraical.truediv_: 2,
+    algebraical.floordiv_: 2,
+    algebraical.mod_: 2,
+    algebraical.pow_: 2
 }
 
 if __name__ == '__main__':

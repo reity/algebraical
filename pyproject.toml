@@ -1,9 +1,11 @@
 [project]
-name = "arithmetically"
+name = "algebraical"
 version = "0.1.0"
 description = """\
-    Class for representing arithmetic operators as callable, \
-    immutable, hashable, and sortable objects.\
+    Subclass of the built-in function type for representing algebraic \
+    operators (that are typically associated with algebraic structures \
+    and algebraic circuits) as immutable, hashable, sortable, and callable \
+    objects.\
     """
 license = {text = "MIT"}
 authors = [
@@ -14,8 +16,8 @@ readme = "README.rst"
 requires-python = ">=3.7"
 
 [project.urls]
-Repository = "https://github.com/reity/arithmetically"
-Documentation = "https://arithmetically.readthedocs.io"
+Repository = "https://github.com/reity/algebraical"
+Documentation = "https://algebraical.readthedocs.io"
 
 [project.optional-dependencies]
 docs = [
@@ -45,4 +47,4 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [tool.pytest.ini_options]
-addopts = "--doctest-modules --ignore=docs --cov=arithmetically --cov-report term-missing"
+addopts = "--doctest-modules --ignore=docs --cov=algebraical --cov-report term-missing"

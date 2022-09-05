@@ -1,72 +1,72 @@
-==============
-arithmetically
-==============
+===========
+algebraical
+===========
 
-Class for representing arithmetic operators as callable, immutable, hashable, and sortable objects.
+Subclass of the `built-in function type <https://docs.python.org/3/library/operator.html>`__ for representing algebraic operators (that are typically associated with algebraic structures and algebraic circuits) as immutable, hashable, sortable, and callable objects.
 
 |pypi| |readthedocs| |actions| |coveralls|
 
-.. |pypi| image:: https://badge.fury.io/py/arithmetically.svg
-   :target: https://badge.fury.io/py/arithmetically
+.. |pypi| image:: https://badge.fury.io/py/algebraical.svg
+   :target: https://badge.fury.io/py/algebraical
    :alt: PyPI version and link.
 
-.. |readthedocs| image:: https://readthedocs.org/projects/arithmetically/badge/?version=latest
-   :target: https://arithmetically.readthedocs.io/en/latest/?badge=latest
+.. |readthedocs| image:: https://readthedocs.org/projects/algebraical/badge/?version=latest
+   :target: https://algebraical.readthedocs.io/en/latest/?badge=latest
    :alt: Read the Docs documentation status.
 
-.. |actions| image:: https://github.com/reity/arithmetically/workflows/lint-test-cover-docs/badge.svg
-   :target: https://github.com/reity/arithmetically/actions/workflows/lint-test-cover-docs.yml
+.. |actions| image:: https://github.com/reity/algebraical/workflows/lint-test-cover-docs/badge.svg
+   :target: https://github.com/reity/algebraical/actions/workflows/lint-test-cover-docs.yml
    :alt: GitHub Actions status.
 
-.. |coveralls| image:: https://coveralls.io/repos/github/reity/arithmetically/badge.svg?branch=main
-   :target: https://coveralls.io/github/reity/arithmetically?branch=main
+.. |coveralls| image:: https://coveralls.io/repos/github/reity/algebraical/badge.svg?branch=main
+   :target: https://coveralls.io/github/reity/algebraical?branch=main
    :alt: Coveralls test coverage summary.
 
 Installation and Usage
 ----------------------
-This library is available as a `package on PyPI <https://pypi.org/project/arithmetically>`__::
+This library is available as a `package on PyPI <https://pypi.org/project/algebraical>`__::
 
-    python -m pip install arithmetically
+    python -m pip install algebraical
 
 The library can be imported in the usual ways::
 
-    import arithmetically
-    from arithmetically import *
+    import algebraical
+    from algebraical import *
 
 Examples
 ^^^^^^^^
 
-.. |arithmetically| replace:: ``arithmetically``
-.. _arithmetically: https://arithmetically.readthedocs.io/en/0.1.0/_source/arithmetically.html#arithmetically.arithmetically.arithmetically
+.. |algebraical| replace:: ``algebraical``
+.. _algebraic: https://algebraical.readthedocs.io/en/0.1.0/_source/algebraical.html#algebraical.algebraical.algebraical
 
 .. |operator| replace:: operator
 .. _operator: https://docs.python.org/3/library/operator.html
 
-Each instance of the |arithmetically|_ class (derived from the type of the built-in functions found in the built-in |operator|_ library) represents a function that operates on on values of `numeric <https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex>`__ types and on objects that define the `special methods <https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types>`__ associated with these built-in operators::
+Each instance of the |algebraical|_ class (derived from the type of the built-in functions found in the built-in |operator|_ library) represents a function that operates on values of typical algebraic structures (such as `numeric <https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex>`__ types and any classes that define the `special methods <https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types>`__ associated with these built-in operators)::
 
-    >>> from arithmetically import arithmetically
-    >>> arithmetically.add_(1, 2)
+    >>> from algebraical import algebraical
+    >>> algebraical.add_(1, 2)
     3
 
-Methods for retrieving the name and arity of an |arithmetically|_ instance are provided::
+Methods for retrieving the name and arity of an |algebraical|_ instance are provided::
 
-    >>> arithmetically.add_.name()
+    >>> algebraical.add_.name()
     'add'
-    >>> arithmetically.add_.arity()
+    >>> algebraical.add_.arity()
     2
 
-Instances of |arithmetically|_ can be compared according to their precedence::
+Instances of |algebraical|_ can be compared according to their precedence::
 
-    >>> arithmetically.pow_ > arithmetically.mul_
+    >>> algebraical.pow_ > algebraical.mul_
     True
-    >>> arithmetically.pow_ <= arithmetically.add_
+    >>> algebraical.pow_ <= algebraical.add_
     False
     >>> sorted([pow_, mul_, add_] # From lowest to highest precedence.
     [add_, mul_, pow_]
 
 Instances are also hashable and can be used as members of `sets <https://docs.python.org/3/tutorial/datastructures.html#sets>`__ and as keys within `dictionaries <https://docs.python.org/3/tutorial/datastructures.html#dictionaries>`__::
 
-    >>> from arithmetically import *
+    >>> from algebraical import *
     >>> {add_, mul_}
     {mul_, add_}
     >>> {add_: 0, mul_: 1}
@@ -97,16 +97,16 @@ All unit tests are executed and their coverage is measured when using `pytest <h
 
 Alternatively, all unit tests are included in the module itself and can be executed using `doctest <https://docs.python.org/3/library/doctest.html>`__::
 
-    python src/arithmetically/arithmetically.py -v
+    python src/algebraical/algebraical.py -v
 
 Style conventions are enforced using `Pylint <https://pylint.pycqa.org>`__::
 
     python -m pip install .[lint]
-    python -m pylint src/arithmetically
+    python -m pylint src/algebraical
 
 Contributions
 ^^^^^^^^^^^^^
-In order to contribute to the source code, open an issue or submit a pull request on the `GitHub page <https://github.com/reity/arithmetically>`__ for this library.
+In order to contribute to the source code, open an issue or submit a pull request on the `GitHub page <https://github.com/reity/algebraical>`__ for this library.
 
 Versioning
 ^^^^^^^^^^
@@ -114,7 +114,7 @@ The version number format for this library and the changes to the library associ
 
 Publishing
 ^^^^^^^^^^
-This library can be published as a `package on PyPI <https://pypi.org/project/arithmetically>`__ by a package maintainer. First, install the dependencies required for packaging and publishing::
+This library can be published as a `package on PyPI <https://pypi.org/project/algebraical>`__ by a package maintainer. First, install the dependencies required for packaging and publishing::
 
     python -m pip install .[publish]
 
